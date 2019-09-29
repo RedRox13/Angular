@@ -1,0 +1,14 @@
+<div class="add-box">
+  <h3>Add new recipe</h3>
+  <div class="add-content">
+    <label for="title">Title</label>
+    <input type="text" (focusout)="item.title = $event.target.value">
+    <label for="description">Description</label>
+    <textarea rows="5" type="text" (focusout)="item.description = $event.target.value"></textarea>
+    <label for="photoUrl">Photo URL</label>
+    <input type="url" (focusout)="item.photoUrl = $event.target.value">
+    <label for="photoUrl">Instruction</label>
+    <textarea rows="5" type="text" (focusout)="item.instructions = $event.target.value"></textarea>
+    <button class="add-button" (click)="addRecipe()">Add</button>
+  </div>
+</div>

@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-app';
+  page: number = 1;
+  receivePage($event) {
+    this.page = $event;
+  }
 }
