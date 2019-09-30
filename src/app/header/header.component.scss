@@ -1,0 +1,42 @@
+header {
+  background-color: #E1E1E1;
+  height: 6vw;
+  color: #4A4A4A;
+  font-weight: 600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  .header {
+    width: 96%;
+    height: 100%;
+    align-items: center;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .app-name {
+      font-size: 2vw;
+    }
+    .navbar {
+      display: grid;
+      justify-content: right;
+      .nav-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        .nav-item {
+          margin-left: 2vw;
+          display: inline;
+          a {
+            color: #4A4A4A;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+.active {
+  padding-bottom: 1vw;
+  border-bottom: 0.2vw solid #D41455;
+}
