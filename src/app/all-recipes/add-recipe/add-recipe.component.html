@@ -1,0 +1,14 @@
+<div class="add-box">
+  <h3>Add new recipe</h3>
+  <div class="add-content">
+    <label for="title">Title</label>
+    <input type="text" #title>
+    <label for="description">Description</label>
+    <textarea rows="5" type="text" #description ></textarea>
+    <label for="photoUrl">Photo URL</label>
+    <input type="url" #url >
+    <label for="photoUrl">Instruction</label>
+    <textarea rows="5" type="text" #instructions></textarea>
+    <button class="add-button" (click)="addRecipe({title: title.value, description: description.value, url: url.value, instructions: instructions.value})">Add</button>
+  </div>
+</div>
