@@ -1,0 +1,25 @@
+<div class="description-box">
+  <div class="description-head">
+    <div class="description-pic">
+      <img src="{{recipe['photoUrl']}}" alt="">
+    </div>
+    <div class="description-info">
+      <h1>{{recipe['title']}}</h1>
+      <p class="desc">{{recipe['description']}}</p>
+      <p class="category">Category: ...</p>
+    </div>
+  </div>
+  <div class="description-buttons">
+    <button>Edit</button>
+    <button>Add to Favorites</button>
+    <button>Purchases</button>
+  </div>
+  <div class="description-ingredients">
+    <h2>Ingredients</h2>
+    <p *ngFor="let item of recipe['ingredients']">{{item}}</p>
+  </div>
+  <div class="description-instructions">
+    <h2>Instructions</h2>
+    <p>{{recipe['instructions']}}</p>
+  </div>
+</div>

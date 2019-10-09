@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PurchasesListService } from 'src/app/core/purchases-list.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-purchases-list',
@@ -8,13 +9,14 @@ import { PurchasesListService } from 'src/app/core/purchases-list.service';
 })
 export class PurchasesListComponent implements OnInit {
   list: string[];
-  constructor(private readonly purchaseService: PurchasesListService) {
-    this.list = purchaseService.list;
-  }
+  constructor(private readonly purchaseService: PurchasesListService,
+              private route: ActivatedRoute,
+  ) { }
   deletePurchase(item: any): void {
     this.purchaseService.deletePurchase(item);
   }
   ngOnInit() {
+    this.list = this.route.snapshot.data.purchases;
   }
 
 }

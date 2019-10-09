@@ -1,7 +1,7 @@
 <div appBoxshadow class="recipe-box">
-  <img src="{{recipe?.photoUrl}}" alt="">
+  <img src="{{recipe['photoUrl']}}" alt="">
   <div class="box-description">
-    <h3>{{recipe.title | shortName:5}}</h3>
+    <h3 (click)="goTo('all-recipes/details', recipe.title)">{{recipe.title | shortName:5}}</h3>
     <p>{{recipe.description}}</p>
   </div>
   <div class="box-edit">
@@ -16,8 +16,8 @@
         <i class="material-icons size">thumb_down</i>
       </div>
       <div class="box-control">
-        <i class="material-icons size">remove_red_eye</i>
-        <i class="material-icons size">edit</i>
+        <i class="material-icons size" (click)="goTo('all-recipes/details', recipe.title)">remove_red_eye</i>
+        <i class="material-icons size" (click)="goTo('all-recipes/edit', recipe.title)">edit</i>
         <i class="material-icons size" (click)="removeRecipe(recipe)">delete</i>
       </div>
     </div>

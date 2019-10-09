@@ -16,6 +16,10 @@ header {
     grid-template-columns: 1fr 1fr;
     .app-name {
       font-size: 2vw;
+      img {
+        width: 6vw;
+        height: 6vw;
+      }
     }
     .navbar {
       display: grid;

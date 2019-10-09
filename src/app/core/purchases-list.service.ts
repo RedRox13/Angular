@@ -8,6 +8,9 @@ export class PurchasesListService {
   constructor() {
     this.list = [];
   }
+  getList(): string[] {
+    return this.list;
+  }
   addPurchase(item: string): void {
     if (item.length > 0 && this.list.indexOf(item) === -1) {
       this.list.push(item);

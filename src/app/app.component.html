@@ -1,6 +1,4 @@
 <div class="body">
-  <app-header (pageEvent)="receivePage($event)"></app-header>
-  <app-all-recipes *ngIf="page==1"></app-all-recipes>
-  <app-favorites *ngIf="page==2"></app-favorites>
-  <app-purchases *ngIf="page==3"></app-purchases>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
 </div>

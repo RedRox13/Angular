@@ -5,7 +5,6 @@ import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [FavoritesComponent],
-  exports: [FavoritesComponent],
   imports: [
     CommonModule, SharedModule
   ]

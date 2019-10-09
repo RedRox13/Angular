@@ -1,5 +1,6 @@
 .recipe-box {
   height: 37vw;
+  widows: 100%;
   display: grid;
   grid-template-rows: 50% 35% 15%;
   justify-items: center;
@@ -19,6 +20,7 @@
       font-weight: 500;
       margin-top: 0.5vw;
       color: #777777;
+      cursor: pointer;
     }
     p {
       font-size: 1.1vw;
@@ -46,7 +48,7 @@
     }
     .box-bottom {
       display: grid;
-      grid-template-columns: 1fr 1fr; 
+      grid-template-columns: 1fr 1fr;
       i {
         cursor: pointer;
       }

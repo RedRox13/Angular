@@ -1,9 +1,12 @@
 .add-box {
   color: #4A4A4A;
   .add-content {
-    width: 30%;
+    width: 50%;
     margin: auto;
     display: grid;
+    label {
+      margin-bottom: 1vw;
+    }
     input, textarea {
       border-radius: 0.2vw;
       border: 1px solid #E1E1E1;

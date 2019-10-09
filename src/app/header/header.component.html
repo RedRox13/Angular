@@ -1,13 +1,14 @@
 <header>
   <div class="header">
-    <div class="app-name">Recipes</div>
+    <div class="app-name">
+      <a href="#" routerLink="all-recipes"><img src="assets/Logo.png" alt=""></a>
+    </div>
     <nav class="navbar">
       <ul class="nav-list">
-        <li class="nav-item" [ngClass]="{'active':page == '1'}"><a href="#" (click)="choosePage(1)">All Recipes</a></li>
-        <li class="nav-item" [ngClass]="{'active':page == '2'}"><a href="#" (click)="choosePage(2)">Favorites</a></li>
-        <li class="nav-item" [ngClass]="{'active':page == '3'}"><a href="#" (click)="choosePage(3)">Purchases</a></li>
+        <li class="nav-item"><a href="#" routerLink="all-recipes" routerLinkActive="active">All Recipes</a></li>
+        <li class="nav-item"><a href="#" routerLink="favorites" routerLinkActive="active">Favorites</a></li>
+        <li class="nav-item"><a href="#" routerLink="purchases" routerLinkActive="active">Purchases</a></li>
       </ul>
-    </nav>   
+    </nav>
   </div>
-</header>   
-  
+</header>
