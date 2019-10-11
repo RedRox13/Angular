@@ -1,16 +1,68 @@
 <div class="add-box">
   <h3 [textContent]= "recipe ? 'Edit recipe' : 'Add new recipe'"></h3>
-  <div class="add-content">
-    <label for="title">Title</label>
-    <input type="text" #title [value]="recipe ? recipe['title'] : ''">
-    <label for="description">Description</label>
-    <textarea rows="5" type="text" #description [value]="recipe ? recipe['description'] : ''"></textarea>
-    <label for="photoUrl">Photo URL</label>
-    <input type="url" #url [value]="recipe ? recipe['photoUrl'] : ''">
-    <label for="photoUrl">Instruction</label>
-    <textarea rows="5" type="text" #instructions [value]="recipe ? recipe['instructions'] : ''"></textarea>
-    <button class="add-button" routerLink="/all-recipes" (click)="!recipe ? addRecipe({title: title.value, description: description.value,
-    photoUrl: url.value, instructions: instructions.value}) : saveRecipe({title: title.value, description: description.value,
-    photoUrl: url.value, instructions: instructions.value})">Add</button>
-  </div>
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipe ? true : false)">
+    <label for="title">
+      Title:
+      <input
+        type="text"
+        id="title"
+        formControlName="title">
+      <div *ngIf="title.errors && (title.dirty || title.touched)">
+        <div class="hidden" [hidden]="!title.errors.required">
+          Title is required!
+        </div>
+        <div class="hidden" [hidden]="!title.errors.maxlength">
+          Title cannot be more than 50 characters long.
+        </div>
+      </div>
+    </label>
+    <label>
+      Description:
+      <textarea
+        rows="5"
+        type="text"
+        formControlName="description"></textarea>
+      <div class="hidden" *ngIf="!description.valid && description.touched">Description is required</div>
+    </label>
+    <label>
+      Url:
+      <input
+        type="url"
+        formControlName="photoUrl">
+      <div *ngIf="url.errors && (url.dirty || url.touched)">
+        <div class="hidden" [hidden]="!url.errors.required">
+          Url is required!
+        </div>
+        <div class="hidden" [hidden]="!url.errors.pattern">
+          Url is not valid!
+        </div>
+      </div>
+    </label>
+    <div class="ingredient__block" formArrayName="ingredients">
+      Ingedients:
+      <button class="add-ingredient" type="button" (click)="addIngredient()">+</button>
+      <div class="ingredient__elem" *ngFor='let item of ingredients.controls; let i=index'>
+        <div [id]='i'>
+          <input type='text' [formControlName]="i">
+        </div>
+        <i class="material-icons" (click)="deleteIngredient(ingredients, i)">clear</i>
+      </div>
+    </div>
+    <label>
+      Instructions:
+      <textarea
+      rows="5"
+      type="text"
+      formControlName="instructions"></textarea>
+      <div class="hidden" *ngIf="!instructions.valid && instructions.touched">Instructions is required</div>
+    </label>
+    <label>
+      Category:
+      <input
+        type="text"
+        formControlName="categoryId">
+      <div class="hidden" *ngIf="!categoryId.valid && categoryId.touched">Category is required</div>
+    </label>
+    <button class="add-button" type="submit" [disabled]="!recipeForm.valid">Add</button>
+  </form>
 </div>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import recipes from './../recipes';
+import { Item } from '../all-recipes/add-recipe/item.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,9 +9,9 @@ export class RecipesArrayService {
   constructor() {
     this.recipes = recipes;
   }
-  getRecipeByTitle(title: string): object {
+  getRecipeById(id: string): Item {
     for (const recipe of recipes) {
-      if (recipe.title === title) {
+      if (recipe.id === +id) {
         return recipe;
       }
     }
@@ -18,17 +19,21 @@ export class RecipesArrayService {
   getRecipesArray(): object[]  {
     return this.recipes;
   }
-  addRecipe(item: any) {
+  addId(item: Item, id: number) {
+    item.id = id;
+    item.likes = item.likes ? item.likes : 0;
+  }
+  addRecipe(item: Item) {
     for (const recipe of recipes) {
-      if (item.title === recipe.title) {
+      if (item.id === recipe.id) {
         return;
       }
     }
     this.recipes.push(item);
   }
-  removeRecipe(obj: any) {
+  removeRecipe(id: any) {
     for (const recipe of recipes) {
-      if (obj.title === recipe.title) {
+      if (id === recipe.id) {
         recipes.splice(recipes.indexOf(recipe), 1);
       }
     }

@@ -10,9 +10,9 @@
     </div>
   </div>
   <div class="description-buttons">
-    <button>Edit</button>
-    <button>Add to Favorites</button>
-    <button>Purchases</button>
+    <button (click)="goTo('all-recipes/edit', recipe?.id)">Edit</button>
+    <button (click)="addToFavorites(recipe)">Add to Favorites</button>
+    <button (click)="addToPurchase(recipe.ingredients)">Purchases</button>
   </div>
   <div class="description-ingredients">
     <h2>Ingredients</h2>

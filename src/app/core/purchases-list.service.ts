@@ -4,10 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PurchasesListService {
-  list: string[];
-  constructor() {
-    this.list = [];
-  }
+  list: string[] = [];
   getList(): string[] {
     return this.list;
   }

@@ -6,4 +6,5 @@ export interface Item {
   instructions: string;
   categoryId: string;
   likes: number;
+  id: number;
 }

@@ -17,11 +17,11 @@ const routes: Routes = [
   ]},
   { path: 'add-recipe', component: AddRecipeComponent},
   {
-    path: 'details/:title', component: RecipeDetailsComponent,
+    path: 'details/:id', component: RecipeDetailsComponent,
     resolve: { details: DetailsResolverService }
   },
   {
-    path: 'edit/:title', component: AddRecipeComponent,
+    path: 'edit/:id', component: AddRecipeComponent,
     resolve: { details: DetailsResolverService }
   },
 ];

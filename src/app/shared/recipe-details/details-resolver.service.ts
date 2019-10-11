@@ -11,6 +11,6 @@ export class DetailsResolverService implements Resolve<object> {
   ) { }
   resolve(route: ActivatedRouteSnapshot, state:
   RouterStateSnapshot): object | Observable<object> | Promise<object> {
-    return this.service.getRecipeByTitle(route.paramMap.get('title'));
+    return this.service.getRecipeById(route.paramMap.get('id'));
   }
 }

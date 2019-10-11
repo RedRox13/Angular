@@ -1,1 +1,8 @@
-<p>Favorites</p>
+<h2>Favorites</h2>
+<div class="list-box">
+  <ul>
+    <li *ngFor="let recipe of list">
+      <app-recipe-item [recipe]="recipe"></app-recipe-item>
+    </li>
+  </ul>
+</div>

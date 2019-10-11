@@ -1,22 +1,25 @@
 .add-box {
   color: #4A4A4A;
-  .add-content {
+  form {
+    display: grid;
     width: 50%;
     margin: auto;
-    display: grid;
+    .hidden {
+      color: red;
+    }
     label {
       margin-bottom: 1vw;
     }
     input, textarea {
-      border-radius: 0.2vw;
+      width: 100%;
+      border-radius: 0.4vw;
       border: 1px solid #E1E1E1;
-      margin-bottom: 2vw;
     }
     input {
       height: 1.8vw;
+      margin: 0.5vw auto;
     }
-    .add-button {
-      margin-left: auto;
+    button {
       margin-top: 1vw;
       background-color: #177A5E;
       color: white;
@@ -28,6 +31,27 @@
       font-size: 1.1vw;
       &:hover {
         background-color: rgb(9, 75, 56);
+      }
+    }
+    .add-ingredient {
+      width: 2vw;
+      height: 2vw;
+      font-size: 1.2vw;
+    }
+    .add-button {
+      margin-left: auto;
+    }
+    .ingredient__block {
+      margin-bottom: 1vw;
+      .ingredient__elem {
+        display: grid;
+        grid-template-columns: 95% 5%;
+        i {
+          margin: auto 1vw;
+          font-weight: 600;
+          cursor: pointer;
+          color: #D41455;
+        }
       }
     }
   }

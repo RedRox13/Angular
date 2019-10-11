@@ -1,30 +1,35 @@
-label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 1vw;
-}
-input {
-  float: left;
-  width: 40%;
-  height: 2vw;
-  border-radius: 0.4vw;
-  border: 1px solid #CED4DA;
-}
-button {
-  i {
-    font-size: 1.2vw;
+form {
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 1vw;
   }
-  margin-left: 2vw;
-  background-color: #177A5E;
-  color: white;
-  width: 14vw;
-  height: 2.3vw;
-  border-radius: 0.4vw;
-  border: none;
-  font-size: 1.3vw;
-  &:hover {
-    background-color: rgb(9, 75, 56);
+  input {
+    float: left;
+    width: 40%;
+    height: 2vw;
+    border-radius: 0.4vw;
+    border: 1px solid #CED4DA;
   }
+  button {
+    i {
+      font-size: 1.2vw;
+    }
+    margin-left: 2vw;
+    background-color: #177A5E;
+    color: white;
+    width: 14vw;
+    height: 2.3vw;
+    border-radius: 0.4vw;
+    border: none;
+    font-size: 1.3vw;
+    &:hover {
+      background-color: rgb(9, 75, 56);
+    }
+  }
+.hidden {
+  color: red;
+}
 }
 hr {
   margin-top: 1.5vw;
