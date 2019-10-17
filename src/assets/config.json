@@ -1,0 +1,4 @@
+{
+  "recipesUrl": "http://localhost:3000/api/recipes",
+  "textfile": "assets/textfile.txt"
+}

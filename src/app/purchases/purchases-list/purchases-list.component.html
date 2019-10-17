@@ -1,7 +1,7 @@
 <h2>Purchases List</h2>
 <ul>
   <li *ngFor="let item of list">
-    <p>{{item}}</p>
-    <i class="material-icons" (click)="deletePurchase(item)">clear</i>
+    <p>{{item.purchase}}</p>
+    <i class="material-icons" (click)="deletePurchase(item.id)">clear</i>
   </li>
 </ul>

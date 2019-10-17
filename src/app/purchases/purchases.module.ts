@@ -4,11 +4,12 @@ import { PurchasesInputComponent } from './purchases-input/purchases-input.compo
 import { PurchasesComponent } from './purchases/purchases.component';
 import { PurchasesListComponent } from './purchases-list/purchases-list.component';
 import { FormsModule } from '@angular/forms';
+import { PurchasesRoutingModule } from './purchases-routing.module';
 @NgModule({
   declarations: [PurchasesInputComponent, PurchasesComponent, PurchasesListComponent],
   exports: [PurchasesComponent],
   imports: [
-    CommonModule, FormsModule
+    CommonModule, FormsModule, PurchasesRoutingModule
   ]
 })
 export class PurchasesModule { }

@@ -2,7 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { RecipesArrayService } from 'src/app/core/recipes-array.service';
 import { Item } from './item.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup,  Validators, FormBuilder, FormArray } from '@angular/forms';
+import { Category } from 'src/app/shared/category';
 @Component({
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.component.html',
@@ -14,7 +15,7 @@ export class AddRecipeComponent implements OnInit {
   intermediateItem: Item;
   item: object;
   recipe: Item;
-  counter = 11;
+  categories: Category[];
   urlPattern = new RegExp('^(https?:\\/\\/)?' +
   '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
     '((\\d{1,3}\\.){3}\\d{1,3}))' +
@@ -27,14 +28,19 @@ export class AddRecipeComponent implements OnInit {
     private readonly router: Router,
     private fb: FormBuilder
   ) { }
-  addId() {
-    this.recipeArray.addId(this.recipeForm.value, this.counter++);
-  }
-  onSubmit(value: boolean) {
-    if (value) {
-      Object.assign(this.recipeArray.getRecipeById(this.route.snapshot.params.id), this.recipeForm.value);
+  onSubmit() {
+    const form = this.recipeForm.value;
+    const cat = this.recipeArray.categories
+      .find((category: Category) =>
+        category.name === form.categoryId
+      ).id;
+    const recipeId = this.route.snapshot.data.id;
+    if (recipeId !== '') {
+      this.recipeForm.value.id = this.route.snapshot.params.id;
+      this.recipeForm.value.categoryId = cat;
+      this.recipeArray.editRecipe(this.recipeForm.value);
     } else {
-      this.addId();
+      this.recipeForm.value.categoryId = cat;
       this.recipeArray.addRecipe(this.recipeForm.value);
     }
     this.router.navigate(['/']);
@@ -42,7 +48,6 @@ export class AddRecipeComponent implements OnInit {
   addIngredient() {
     this.ingredients.push(this.fb.control(''));
   }
-
   deleteIngredient(control: any, index: number) {
     control.removeAt(index);
   }
@@ -65,9 +70,7 @@ export class AddRecipeComponent implements OnInit {
   get ingredients() {
     return this.recipeForm.get('ingredients') as FormArray;
   }
-  ngOnInit() {
-    this.recipe = this.recipeArray.getRecipeById(this.route.snapshot.params.id);
-
+  makeForm() {
     this.recipeForm = this.fb.group({
       title: [this.recipe ? this.recipe.title : '', [
         Validators.required,
@@ -80,13 +83,28 @@ export class AddRecipeComponent implements OnInit {
         Validators.required,
         Validators.pattern(this.urlPattern)
       ]],
+      ingredients: this.fb.array(this.recipe ? this.recipe.ingredients : []),
       instructions: [this.recipe ? this.recipe.instructions : '', [
         Validators.required
       ]],
-      categoryId: [this.recipe ? this.recipe.categoryId : '', [
+      categoryId: ['', [
         Validators.required
       ]],
-      ingredients: this.fb.array(this.recipe ? this.recipe.ingredients : [])
     });
+  }
+  ngOnInit() {
+    this.makeForm();
+    if (this.route.snapshot.params.id) {
+      this.recipeArray.getParticularRecipe(this.route.snapshot.params.id)
+        .subscribe((data) => {
+          this.recipe = data;
+          this.makeForm();
+        });
+    }
+    this.recipeArray.getCategories()
+      .subscribe((categories) => {
+        this.categories = categories;
+        this.recipeArray.categories = categories;
+      });
   }
 }

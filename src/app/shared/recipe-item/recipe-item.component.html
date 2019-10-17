@@ -1,8 +1,8 @@
 <div appBoxshadow class="recipe-box">
   <img src="{{recipe['photoUrl']}}" alt="">
   <div class="box-description">
-    <h3 (click)="goTo('all-recipes/details', recipe.id)">{{recipe.title | shortName:5}}</h3>
-    <p>{{recipe.description}}</p>
+    <h3 (click)="goTo('all-recipes/details', recipe.id)">{{recipe.title | shortName:50}}</h3>
+    <p>{{recipe.description | shortName:230}}</p>
   </div>
   <div class="box-edit">
     <div class="likes">
@@ -12,8 +12,8 @@
     <hr>
     <div class="box-bottom">
       <div class="box-vote">
-        <i class="material-icons size">thumb_up</i>
-        <i class="material-icons size">thumb_down</i>
+        <i class="material-icons size" (click)="putLike(recipe.id)">thumb_up</i>
+        <i class="material-icons size" (click)="putDislike(recipe.id)">thumb_down</i>
       </div>
       <div class="box-control">
         <i class="material-icons size" (click)="goTo('all-recipes/details', recipe.id)">remove_red_eye</i>

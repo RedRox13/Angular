@@ -1,6 +1,6 @@
 <div class="add-box">
   <h3 [textContent]= "recipe ? 'Edit recipe' : 'Add new recipe'"></h3>
-  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipe ? true : false)">
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
     <label for="title">
       Title:
       <input
@@ -56,12 +56,13 @@
       formControlName="instructions"></textarea>
       <div class="hidden" *ngIf="!instructions.valid && instructions.touched">Instructions is required</div>
     </label>
-    <label>
-      Category:
-      <input
-        type="text"
-        formControlName="categoryId">
-      <div class="hidden" *ngIf="!categoryId.valid && categoryId.touched">Category is required</div>
+    <label class="categories-input input">
+      <p>Category: </p>
+      <select class="custom-select" formControlName="categoryId">
+        <option value="" disabled></option>
+        <option *ngFor="let category of categories">{{ category.name }}</option>
+        <div class="hidden" *ngIf="!categoryId.valid">Category is required</div>
+      </select>
     </label>
     <button class="add-button" type="submit" [disabled]="!recipeForm.valid">Add</button>
   </form>

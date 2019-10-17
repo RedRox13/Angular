@@ -1,41 +1,89 @@
 import { Injectable } from '@angular/core';
-import recipes from './../recipes';
 import { Item } from '../all-recipes/add-recipe/item.model';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Category } from '../shared/category';
+
 @Injectable({
   providedIn: 'root'
 })
 export class RecipesArrayService {
-  recipes: object[];
-  constructor() {
-    this.recipes = recipes;
+  recipeSubject = new Subject();
+  categories: Category[];
+  recipes: Item[];
+  serverUrl = 'http://localhost:3000/api';
+  constructor(private http: HttpClient) {
+      this.getCategories().subscribe((categories) => {
+        this.categories = categories;
+      });
+     }
+  getRecipesArray(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.serverUrl}/recipes`);
   }
-  getRecipeById(id: string): Item {
-    for (const recipe of recipes) {
-      if (recipe.id === +id) {
-        return recipe;
-      }
-    }
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.serverUrl}/categories`);
   }
-  getRecipesArray(): object[]  {
-    return this.recipes;
-  }
-  addId(item: Item, id: number) {
-    item.id = id;
-    item.likes = item.likes ? item.likes : 0;
+  removeRecipe(id: string) {
+    const url = `${this.serverUrl}/recipes/${id}`;
+    this.http.delete(url).subscribe(() => {
+      this.recipeSubject.next();
+    });
   }
   addRecipe(item: Item) {
-    for (const recipe of recipes) {
-      if (item.id === recipe.id) {
-        return;
-      }
-    }
-    this.recipes.push(item);
+    this.http.post<Item>(`${this.serverUrl}/recipes`, item)
+      .subscribe(() => {
+        this.recipeSubject.next();
+    });
   }
-  removeRecipe(id: any) {
-    for (const recipe of recipes) {
-      if (id === recipe.id) {
-        recipes.splice(recipes.indexOf(recipe), 1);
-      }
-    }
+  editRecipe(item: Item) {
+    this.http.put<Item>(`${this.serverUrl}/recipes`, item)
+      .subscribe(() => {
+        this.recipeSubject.next();
+    });
+  }
+  getParticularRecipe(id: string): Observable<Item> {
+    return this.http.get<Item>(`${this.serverUrl}/recipes/${id}`);
+  }
+  putLike(id: string) {
+    this.http.post(`${this.serverUrl}/recipes/likes`, {id})
+      .subscribe(() => {
+        this.recipeSubject.next();
+    });
+  }
+  putDislike(id: string) {
+    this.http.post(`${this.serverUrl}/recipes/dislikes`, {id})
+      .subscribe(() => {
+        this.recipeSubject.next();
+    });
+  }
+  getFavoritesList(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.serverUrl}/favorites`);
+  }
+  addFavorite(id: string) {
+    this.http.post(`${this.serverUrl}/favorites`, {id})
+      .subscribe(() => {
+        this.recipeSubject.next();
+      });
+  }
+  deleteFavorite(id: string) {
+    const url = `${this.serverUrl}/favorites/${id}`;
+    this.http.delete(url).subscribe(() => {
+      this.recipeSubject.next();
+    });
+  }
+  getPurchasesList(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.serverUrl}/purchases`);
+  }
+  addPurchase(purchases: string) {
+    this.http.post(`${this.serverUrl}/purchases`, {purchases})
+      .subscribe(() => {
+        this.recipeSubject.next();
+      });
+  }
+  deletePurchase(id: string) {
+    const url = `${this.serverUrl}/purchases/${id}`;
+    this.http.delete(url).subscribe(() => {
+      this.recipeSubject.next();
+    });
   }
 }

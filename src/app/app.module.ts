@@ -7,18 +7,18 @@ import { AllRecipesModule } from './all-recipes/all-recipes.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { PurchasesModule } from './purchases/purchases.module';
 import { RecipesArrayService } from './core/recipes-array.service';
-import { PurchasesListService } from './core/purchases-list.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent
   ],
   imports: [
-    BrowserModule, SharedModule, AllRecipesModule, FavoritesModule, PurchasesModule, AppRoutingModule
+    BrowserModule, SharedModule, AllRecipesModule, FavoritesModule, PurchasesModule, AppRoutingModule, HttpClientModule
   ],
   exports: [SharedModule],
-  providers: [RecipesArrayService, PurchasesListService],
+  providers: [RecipesArrayService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

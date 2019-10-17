@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PurchasesListService } from 'src/app/core/purchases-list.service';
 import { ActivatedRoute } from '@angular/router';
+import { RecipesArrayService } from 'src/app/core/recipes-array.service';
 
 @Component({
   selector: 'app-purchases-list',
@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./purchases-list.component.scss']
 })
 export class PurchasesListComponent implements OnInit {
-  list: string[];
-  constructor(private readonly purchaseService: PurchasesListService,
+  list: any[];
+  constructor(private readonly purchaseService: RecipesArrayService,
               private route: ActivatedRoute,
   ) { }
   deletePurchase(item: any): void {
@@ -17,6 +17,10 @@ export class PurchasesListComponent implements OnInit {
   }
   ngOnInit() {
     this.list = this.route.snapshot.data.purchases;
+    this.purchaseService.recipeSubject.subscribe(() => {
+      this.purchaseService.getPurchasesList().subscribe((data) => {
+        this.list = data;
+      });
+    });
   }
-
 }

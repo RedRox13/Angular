@@ -1,7 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RecipesArrayService } from 'src/app/core/recipes-array.service';
-import { FavoritesService } from 'src/app/core/favorites.service';
 @Component({
   selector: 'app-recipe-item',
   templateUrl: './recipe-item.component.html',
@@ -13,18 +12,21 @@ export class RecipeItemComponent {
     private readonly router: Router,
     private recipeArray: RecipesArrayService,
     private route: ActivatedRoute,
-    private favoritesList: FavoritesService
     ) {
   }
-  removeRecipe(id: number): void {
-    if (this.route.snapshot.routeConfig.path === 'favorites') {
-      this.favoritesList.removeRecipe(id);
-    } else {
-      this.favoritesList.removeRecipe(id);
-      this.recipeArray.removeRecipe(id);
-    }
+  removeRecipe(id: string): void {
+      this.recipeArray.deleteFavorite(id);
+      if (!this.route.snapshot.data.id) {
+        this.recipeArray.removeRecipe(id);
+      }
   }
-  goTo(url: string, id: number) {
+  putLike(id: string) {
+    this.recipeArray.putLike(id);
+  }
+  putDislike(id: string) {
+    this.recipeArray.putDislike(id);
+  }
+  goTo(url: string, id: string) {
     this.router.navigate([url, id]);
   }
 }
