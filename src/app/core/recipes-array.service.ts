@@ -13,17 +13,17 @@ export class RecipesArrayService {
   recipes: Item[];
   serverUrl = 'http://localhost:3000/api';
   constructor(private http: HttpClient) {
-      this.getCategories().subscribe((categories) => {
-        this.categories = categories;
-      });
-     }
+    this.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
   getRecipesArray(): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.serverUrl}/recipes`);
   }
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.serverUrl}/categories`);
   }
-  removeRecipe(id: string) {
+  removeRecipe(id: string): any {
     const url = `${this.serverUrl}/recipes/${id}`;
     this.http.delete(url).subscribe(() => {
       this.recipeSubject.next();

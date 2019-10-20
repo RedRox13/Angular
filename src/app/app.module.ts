@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule, SharedModule, AllRecipesModule, FavoritesModule, PurchasesModule, AppRoutingModule, HttpClientModule
   ],
   exports: [SharedModule],
-  providers: [RecipesArrayService],
+  providers: [RecipesArrayService, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
